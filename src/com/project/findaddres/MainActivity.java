@@ -30,6 +30,7 @@ public class MainActivity extends Activity {
    
     TextView textView2,textView3,textView1;
     Button button1;
+    Button button2;
    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class MainActivity extends Activity {
         textView3=(TextView)findViewById(R.id.textView3);// text to show longitude
         textView1=(TextView)findViewById(R.id.textView1);// text to show addresses
         button1=(Button)findViewById(R.id.button1); // button
-       
+        button2=(Button)findViewById(R.id.button2);
 // click the below to get the current location and address.
         button1.setOnClickListener(new OnClickListener() {
            
@@ -53,7 +54,18 @@ public class MainActivity extends Activity {
                
             }
         });
-       
+       button2.setOnClickListener(new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+			smsIntent.setType("vnd.android-dir/mms-sms");
+			smsIntent.putExtra("address", "8179639514");
+			smsIntent.putExtra("sms_body","I'm at"+textView1.getText().toString()+" "+textView2.getText().toString()+" "+textView3.getText().toString());
+			startActivity(smsIntent);
+		}
+	});
        
     }
 /** Method to turn on GPS **/
